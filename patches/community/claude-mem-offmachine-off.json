@@ -1,0 +1,78 @@
+{
+  "id": "claude-mem-offmachine-off",
+  "plugin": "claude-mem@thedotmack",
+  "testedVersion": "15.19.0",
+  "description": "Removes off-machine network code from 3 claude-mem skills: request-progress remote judge (OpenRouter/cmem.ai), agent-cost-report OpenRouter classifier and key-usage call, mode-creator Telegram API. The local worker features keep working; those optional remote features report \"disabled on this machine\". Also removes dev-only tests.",
+  "edits": [
+    {
+      "file": "skills/request-progress/scripts/request-groups.mjs",
+      "start": "function jevClientFromSettings(",
+      "end": "\nfunction configuredJudge(",
+      "replace": "function jevClientFromSettings() {\n  return null; // LOCAL-PATCH: remote judge disabled, the local rules judge is used\n}"
+    },
+    {
+      "file": "skills/request-progress/scripts/request-groups.mjs",
+      "start": "OPENROUTER_DECISIONS_URL = \"https://openrouter.ai/api/alpha/decisions\";",
+      "end": null,
+      "replace": "OPENROUTER_DECISIONS_URL = \"\"; // LOCAL-PATCH"
+    },
+    {
+      "file": "skills/agent-cost-report/scripts/acr/classify.py",
+      "start": "def _call(model, prompt, key, url=URL, timeout=60):",
+      "end": "\n\n\ndef run(",
+      "replace": "def _call(model, prompt, key, url=URL, timeout=60):\n    raise ClassifierError(\"LOCAL-PATCH: classifier disabled on this machine\")"
+    },
+    {
+      "file": "skills/agent-cost-report/scripts/acr/classify.py",
+      "start": "    Prints the estimate first; over the cap it classifies a stratified random sample and scales up.\"\"\"\n",
+      "end": null,
+      "replace": "    Prints the estimate first; over the cap it classifies a stratified random sample and scales up.\"\"\"\n    raise ClassifierError(\"LOCAL-PATCH: classifier disabled on this machine; classifier not run\")\n"
+    },
+    {
+      "file": "skills/agent-cost-report/scripts/acr/classify.py",
+      "start": "URL = \"https://openrouter.ai/api/v1/chat/completions\"",
+      "end": null,
+      "replace": "URL = \"\"  # LOCAL-PATCH"
+    },
+    {
+      "file": "skills/agent-cost-report/scripts/acr/classify.py",
+      "start": "import urllib.request\n",
+      "end": null,
+      "replace": "# LOCAL-PATCH: urllib import removed\n"
+    },
+    {
+      "file": "skills/agent-cost-report/scripts/acr/classify.py",
+      "start": "key = key if key is not None else os.environ.get(\"OPENROUTER_API_KEY\")",
+      "end": null,
+      "replace": "key = None  # LOCAL-PATCH"
+    },
+    {
+      "file": "skills/agent-cost-report/scripts/acr/measure.py",
+      "start": "def fetch(key, url=URL, opener=urllib.request.urlopen, timeout=30):",
+      "end": "\n\n\ndef measure(",
+      "replace": "def fetch(key, url=URL, opener=None, timeout=30):\n    raise OSError(\"LOCAL-PATCH: disabled on this machine\")"
+    },
+    {
+      "file": "skills/agent-cost-report/scripts/acr/measure.py",
+      "start": "    key = env.get(ENV)\n",
+      "end": null,
+      "replace": "    key = None  # LOCAL-PATCH\n"
+    },
+    {
+      "file": "skills/agent-cost-report/scripts/acr/measure.py",
+      "start": "URL = \"https://openrouter.ai/api/v1/key\"",
+      "end": null,
+      "replace": "URL = \"\"  # LOCAL-PATCH"
+    },
+    {
+      "file": "skills/mode-creator/scripts/configure-telegram.mjs",
+      "start": "async function telegramCall(token, method, body) {",
+      "end": "\nfunction chatsFromUpdates(",
+      "replace": "async function telegramCall() {\n  throw new Error('LOCAL-PATCH: Telegram setup is disabled on this machine.');\n}\n"
+    }
+  ],
+  "remove": [
+    "skills/agent-cost-report/scripts/tests",
+    "skills/agent-cost-report/scripts/acr/__pycache__"
+  ]
+}

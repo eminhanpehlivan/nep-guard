@@ -1,0 +1,21 @@
+{
+  "name": "nep-guard",
+  "version": "0.1.0",
+  "description": "Zero-trust auto-remediation for Claude Code: finds risky code in skills, plugins and claude.ai connectors, fixes it without breaking the skill, and keeps the fix applied across updates. Powered by NVIDIA SkillSpector.",
+  "author": {
+    "name": "NEP",
+    "url": "https://github.com/eminhanpehlivan"
+  },
+  "license": "Apache-2.0",
+  "keywords": [
+    "security",
+    "skills",
+    "mcp",
+    "connectors",
+    "auto-remediation",
+    "zero-trust",
+    "skillspector"
+  ],
+  "homepage": "https://github.com/eminhanpehlivan/nep-guard",
+  "repository": "https://github.com/eminhanpehlivan/nep-guard"
+}

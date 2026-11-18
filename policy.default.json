@@ -1,0 +1,9 @@
+{
+  "language": "en",
+  "autoRemediate": true,
+  "askBeforePaidTools": true,
+  "connectorInstructionsUntrusted": true,
+  "applyCommunityPacks": true,
+  "connectorCheckMinutes": 60,
+  "extraRules": []
+}

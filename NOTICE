@@ -1,0 +1,20 @@
+NEP Guard
+Copyright 2026 NEP
+
+This product is licensed under the Apache License, Version 2.0 (see LICENSE).
+
+NEP Guard uses, but does not include or modify, the following software:
+
+  NVIDIA SkillSpector (https://github.com/NVIDIA/SkillSpector)
+  Licensed under the Apache License, Version 2.0.
+  SkillSpector is installed separately by the user and invoked as an
+  external scanning engine.
+
+"SkillSpector" and "NVIDIA" are trademarks of NVIDIA Corporation. "Claude"
+and "Claude Code" are trademarks of Anthropic, PBC. NEP Guard is an
+independent project and is not affiliated with or endorsed by NVIDIA,
+Anthropic or Snyk.
+
+The community patch packs in patches/community/ modify files of third-party
+plugins installed on the user's own machine; they contain only short exact-text
+anchors needed to locate the code being neutralized.

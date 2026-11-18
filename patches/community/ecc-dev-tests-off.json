@@ -1,0 +1,12 @@
+{
+  "id": "ecc-dev-tests-off",
+  "plugin": "ecc@ecc",
+  "testedVersion": "2.2.3",
+  "description": "Removes dev-only test files from 3 ECC skills (skill-comply, taste-application, continuous-learning-v2). They carry risky-looking fixtures (remote package installs, system-file reads) and are never used at runtime.",
+  "edits": [],
+  "remove": [
+    "skills/skill-comply/tests",
+    "skills/taste-application/tests",
+    "skills/continuous-learning-v2/scripts/test_parse_instinct.py"
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "nep-guard",
+  "description": "Zero-trust auto-remediation layer for Claude Code skills, plugins and connectors.",
+  "owner": {
+    "name": "NEP",
+    "url": "https://github.com/eminhanpehlivan"
+  },
+  "plugins": [
+    {
+      "name": "nep-guard",
+      "description": "Scans skills, plugins and claude.ai connectors, fixes real risks without breaking the skill, and keeps the fix applied across updates.",
+      "source": "./",
+      "category": "security"
+    }
+  ]
+}
